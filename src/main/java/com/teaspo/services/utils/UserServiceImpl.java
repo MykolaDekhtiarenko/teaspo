@@ -128,8 +128,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(rollbackFor=NoSuchEntityException.class)
-    public UserEntity update(UserEntity user) throws NoSuchEntityException {
-        UserEntity updatedUser = usersRepository.findOne(user.getId());
+    public Boolean update(UserView userView) throws NoSuchEntityException {
+        UserEntity updatedUser = usersRepository.findOne(userView.getId());
+        UserEntity user = new UserEntity();
+        merge(user, userView);
+
         if (updatedUser == null)
             throw new NoSuchEntityException(UserEntity.class.getName(),"userId"+user.getId());
         updatedUser.setNikname(user.getNikname());
@@ -138,7 +141,7 @@ public class UserServiceImpl implements IUserService {
         updatedUser.setActive(user.isActive());
         updatedUser.setRoleEntity(user.getRoleEntity());
         usersRepository.saveAndFlush(updatedUser);
-        return updatedUser;
+        return true;
     }
 
     @Override

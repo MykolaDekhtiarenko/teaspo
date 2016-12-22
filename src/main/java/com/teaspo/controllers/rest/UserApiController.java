@@ -1,6 +1,8 @@
 package com.teaspo.controllers.rest;
 
+import com.teaspo.exceptions.NoSuchEntityException;
 import com.teaspo.exceptions.TeaSpoException;
+import com.teaspo.persistence.entities.RoleEntity;
 import com.teaspo.persistence.entities.UserEntity;
 import com.teaspo.pojo.other.Response;
 import com.teaspo.services.converters.Fields;
@@ -101,9 +103,9 @@ public class UserApiController {
     )
     public
     @ResponseBody Response<Boolean>
-    update(@RequestBody UserView view){
-        //TODO
-        return null;
+    update(@RequestBody UserView userView) throws NoSuchEntityException {
+        System.out.println("Зайшло!");
+        return responseFactory.get(userService.update(userView));
     }
 
 
