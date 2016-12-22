@@ -62,9 +62,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `teaspo`.`role_to_permision`
+-- Table `teaspo`.`role_to_permission`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `teaspo`.`role_to_permision` (
+CREATE TABLE IF NOT EXISTS `teaspo`.`role_to_permission` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `role_id` INT NOT NULL COMMENT '',
   `permission_id` INT NOT NULL COMMENT '',
@@ -152,12 +152,12 @@ INSERT INTO `teaspo`.`permissions` (`name`) VALUES ('ROLE_USER');
 INSERT INTO `teaspo`.`permissions` (`name`) VALUES ('ROLE_MODERATOR');
 INSERT INTO `teaspo`.`permissions` (`name`) VALUES ('ROLE_ADMIN');
 
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('1', '1');
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('2', '1');
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('2', '2');
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('3', '1');
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('3', '2');
-insert into `teaspo`.`role_to_permision` (`role_id`, `permission_id`) values ('3', '3');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('1', '1');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('2', '1');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('2', '2');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('3', '1');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('3', '2');
+insert into `teaspo`.`role_to_permission` (`role_id`, `permission_id`) values ('3', '3');
 
 insert into `teaspo`.`users` (`email`, `password`, `active`, `role_id`) VALUES ('admin@teaspo.com',MD5('admin'),1,3);
 
