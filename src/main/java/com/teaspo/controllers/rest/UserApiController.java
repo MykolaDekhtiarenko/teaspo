@@ -1,6 +1,7 @@
 package com.teaspo.controllers.rest;
 
 import com.teaspo.exceptions.TeaSpoException;
+import com.teaspo.persistence.entities.UserEntity;
 import com.teaspo.pojo.other.Response;
 import com.teaspo.services.converters.Fields;
 import com.teaspo.services.utils.IUserService;
@@ -56,6 +57,7 @@ public class UserApiController {
         return responseFactory.get(userService.getUsersMap(offset, limit, fields));
     }
 
+
     @RequestMapping(
             value = "/",
             method = RequestMethod.PUT
@@ -67,6 +69,7 @@ public class UserApiController {
     ) throws TeaSpoException {
         return responseFactory.get(userService.create(view));
     }
+
 
     @RequestMapping(
             value = "/sign_in",
@@ -80,6 +83,7 @@ public class UserApiController {
         return responseFactory.get(userService.signInUser(view));
     }
 
+
     @RequestMapping(
             value = "/logout",
             method = RequestMethod.POST
@@ -89,4 +93,18 @@ public class UserApiController {
     logout(HttpServletRequest request, HttpServletResponse response){
         return responseFactory.get(userService.logoutUser(request, response));
     }
+
+
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
+    public
+    @ResponseBody Response<Boolean>
+    update(@RequestBody UserView view){
+        //TODO
+        return null;
+    }
+
+
 }

@@ -134,7 +134,10 @@ public class UserServiceImpl implements IUserService {
             throw new NoSuchEntityException(UserEntity.class.getName(),"userId"+user.getId());
         updatedUser.setNikname(user.getNikname());
         updatedUser.setEmail(user.getEmail());
-        //TODO add oll other
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setActive(user.isActive());
+        updatedUser.setRoleEntity(user.getRoleEntity());
+        usersRepository.saveAndFlush(updatedUser);
         return updatedUser;
     }
 
@@ -166,6 +169,12 @@ public class UserServiceImpl implements IUserService {
         return true;
     }
 
+    @Override
+    public boolean disableUser(int userId) throws NoSuchEntityException {
+        UserEntity entity = getUserById(userId);
+        return false;
+    }
+
     private List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (PermissionEntity perm : user.getRoleEntity().getPermissions()){
@@ -173,6 +182,7 @@ public class UserServiceImpl implements IUserService {
         }
         return authorities;
     }
+
 
     public void merge(UserEntity entity, UserView view){
         if(view.getNikname() != null)

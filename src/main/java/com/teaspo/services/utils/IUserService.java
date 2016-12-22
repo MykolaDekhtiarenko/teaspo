@@ -33,4 +33,6 @@ public interface IUserService {
 
     boolean logoutUser(HttpServletRequest request, HttpServletResponse response);
 
+    boolean disableUser(int userId) throws NoSuchEntityException;
+
 }

@@ -18,14 +18,13 @@ public class RoleServiceImpl implements IRoleService {
 
 	 @Resource
 	 private RolesRepository rolesRepository;
-	
+
+
 	@Override
-	public RoleEntity changeRole(RoleEntity role) throws NoSuchEntityException {
-		RoleEntity changedRole = rolesRepository.findOne(role.getId());
-	    if (changedRole == null)
-	    	throw new NoSuchEntityException(RoleEntity.class.getName(), "roleId "+role.getId());
-	    changedRole.setName(role.getName());
-	    return changedRole;
+	public RoleEntity getRoleById(int roleId) throws NoSuchEntityException {
+		RoleEntity role = rolesRepository.findOne(roleId);
+		if (role == null)
+			throw new NoSuchEntityException("role", "id: " + roleId);
+		return role;
 	}
-	
 }

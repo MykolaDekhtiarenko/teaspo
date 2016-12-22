@@ -25,14 +25,16 @@ public class RoleApiController {
     @Autowired
     private ResponseFactory responseFactory;
 
+
     @RequestMapping(
-            value = "/",
-            method = RequestMethod.PUT
+            value = "/{id}",
+            method = RequestMethod.GET
     )
     public
     @ResponseBody
     Response<RoleEntity>
-    changeRole(RoleEntity role) throws NoSuchEntityException{ 
-    	return responseFactory.get(roleService.changeRole(role));
+    getRole(@PathVariable("id") int roleId)
+            throws NoSuchEntityException{
+        return responseFactory.get(roleService.getRoleById(roleId));
     }
 }
