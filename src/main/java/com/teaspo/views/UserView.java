@@ -1,5 +1,6 @@
 package com.teaspo.views;
 
+import com.teaspo.persistence.entities.UserEntity;
 import com.teaspo.pojo.enams.RolesEnum;
 import org.hibernate.validator.constraints.Email;
 
@@ -118,4 +119,6 @@ public class UserView {
                 ", role=" + role +
                 '}';
     }
+
+
 }

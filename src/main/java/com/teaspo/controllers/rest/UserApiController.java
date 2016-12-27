@@ -1,7 +1,6 @@
 package com.teaspo.controllers.rest;
 
-import com.teaspo.exceptions.NoSuchEntityException;
-import com.teaspo.exceptions.TeaSpoException;
+import com.teaspo.exceptions.*;
 import com.teaspo.persistence.entities.RoleEntity;
 import com.teaspo.persistence.entities.UserEntity;
 import com.teaspo.pojo.other.Response;
@@ -102,10 +101,39 @@ public class UserApiController {
             method = RequestMethod.POST
     )
     public
-    @ResponseBody Response<Boolean>
+    @ResponseBody Response<UserEntity>
     update(@RequestBody UserView userView) throws NoSuchEntityException {
-        System.out.println("Зайшло!");
         return responseFactory.get(userService.update(userView));
+    }
+
+    @RequestMapping(
+            value = "/create",
+            method = RequestMethod.POST
+    )
+    public
+    @ResponseBody Response<Integer>
+    create(@RequestBody UserView userView) throws NoSuchEntityException, ServiceErrorException, ValidationException, EmailExistsException {
+        return responseFactory.get(userService.create(userView));
+    }
+
+    @RequestMapping(
+            value = "/disable/{id}",
+            method = RequestMethod.POST
+    )
+    public
+    @ResponseBody Response<UserEntity>
+    disable(@PathVariable("id") int userId) throws NoSuchEntityException, ServiceErrorException, ValidationException, EmailExistsException {
+        return responseFactory.get(userService.disableUser(userId));
+    }
+
+    @RequestMapping(
+            value = "/enable/{id}",
+            method = RequestMethod.POST
+    )
+    public
+    @ResponseBody Response<UserEntity>
+    enable(@PathVariable("id") int userId) throws NoSuchEntityException, ServiceErrorException, ValidationException, EmailExistsException {
+        return responseFactory.get(userService.enableUser(userId));
     }
 
 

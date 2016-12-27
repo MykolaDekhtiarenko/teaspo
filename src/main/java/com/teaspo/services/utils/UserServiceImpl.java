@@ -128,20 +128,24 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(rollbackFor=NoSuchEntityException.class)
-    public Boolean update(UserView userView) throws NoSuchEntityException {
-        UserEntity updatedUser = usersRepository.findOne(userView.getId());
-        UserEntity user = new UserEntity();
-        merge(user, userView);
+    public UserEntity update(UserView userView) throws NoSuchEntityException {
+       return update(viewToEntity(userView));
+    }
+
+    @Override
+    @Transactional(rollbackFor=NoSuchEntityException.class)
+    public UserEntity update(UserEntity userData) throws NoSuchEntityException {
+        UserEntity updatedUser = usersRepository.findOne(userData.getId());
 
         if (updatedUser == null)
-            throw new NoSuchEntityException(UserEntity.class.getName(),"userId"+user.getId());
-        updatedUser.setNikname(user.getNikname());
-        updatedUser.setEmail(user.getEmail());
-        updatedUser.setPassword(user.getPassword());
-        updatedUser.setActive(user.isActive());
-        updatedUser.setRoleEntity(user.getRoleEntity());
+            throw new NoSuchEntityException(UserEntity.class.getName(),"userId"+userData.getId());
+        updatedUser.setNikname(userData.getNikname());
+        updatedUser.setEmail(userData.getEmail());
+        updatedUser.setPassword(userData.getPassword());
+        updatedUser.setActive(userData.isActive());
+        updatedUser.setRoleEntity(userData.getRoleEntity());
         usersRepository.saveAndFlush(updatedUser);
-        return true;
+        return updatedUser;
     }
 
     @Override
@@ -173,9 +177,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean disableUser(int userId) throws NoSuchEntityException {
+    public UserEntity disableUser(int userId) throws NoSuchEntityException {
         UserEntity entity = getUserById(userId);
-        return false;
+        entity.setActive(false);
+        update(entity);
+        return entity;
+    }
+
+    @Override
+    public UserEntity enableUser(int userId) throws NoSuchEntityException {
+        UserEntity entity = getUserById(userId);
+        entity.setActive(true);
+        update(entity);
+        return entity;
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
@@ -210,5 +224,17 @@ public class UserServiceImpl implements IUserService {
         }else if (entity.getRoleEntity()!=null){
             view.setRole(entity.getRoleEntity().getName());
         }
+    }
+
+    public UserEntity viewToEntity(UserView view){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(view.getId());
+        userEntity.setEmail(view.getEmail());
+        userEntity.setNikname(view.getNikname());
+        userEntity.setPassword(view.getPassword());
+        userEntity.setActive(view.getActive());
+        RoleEntity role = rolesRepository.findByName(view.getRole());
+        userEntity.setRoleEntity(role);
+        return userEntity;
     }
 }

@@ -27,12 +27,16 @@ public interface IUserService {
 
     int create(UserView view) throws EmailExistsException, ServiceErrorException, ValidationException;
 
-    Boolean update(UserView user) throws NoSuchEntityException;
+    UserEntity update(UserView user) throws NoSuchEntityException;
+
+    UserEntity update(UserEntity user) throws NoSuchEntityException;
 
     boolean signInUser(UserView view) throws NoSuchEntityException, WrongPasswordException;
 
     boolean logoutUser(HttpServletRequest request, HttpServletResponse response);
 
-    boolean disableUser(int userId) throws NoSuchEntityException;
+    UserEntity disableUser(int userId) throws NoSuchEntityException;
+
+    UserEntity enableUser(int userId) throws NoSuchEntityException;
 
 }
