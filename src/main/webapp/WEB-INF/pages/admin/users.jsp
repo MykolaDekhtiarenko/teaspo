@@ -30,7 +30,7 @@
         <td>{{user.nikname}}</td>
         <td>{{user.state}}</td>
         <td>{{user.email}}</td>
-        <td><a href="/web/admin/{{user.id}}" class="glyphicon glyphicon-pencil"></a></td>
+        <td><a href="/web/admin/{{user.id}}/edit" class="glyphicon glyphicon-pencil"></a></td>
         <td><a href="" class="glyphicon glyphicon-trash"></a></td>
     </tr>
 

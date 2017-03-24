@@ -17,7 +17,7 @@ public class AdminController {
     }
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String userEditPage(){
-        return "/admin/userEdit";
+        return "WEB-INF/pages/admin/userEdit";
     }
 
 

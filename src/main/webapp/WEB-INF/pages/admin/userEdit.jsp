@@ -39,15 +39,22 @@
 
 </head>
 <body>
+<script>
+    var HEADERS = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    };
 
-<h1 class="text-center">Account settings <br> ID:</h1>
+</script>
+<h1 class="text-center">Account settings <br> ID: ${id}</h1>
 <div id="settings" ng-controller="user_controller">
-    <div ng-controller="user_edit_controller">
-    <form class="form-horizontal col-xs-offset-2 col-sm-offset-3 col-md-offset-3" ng-submit="userSave()">
+
+    <div ng-controller="user_edit_controller" >
+    <form class="form-horizontal col-xs-offset-2 col-sm-offset-3 col-md-offset-3" ng-submit="userSave()" >
         <div class="form-group">
             <label class=" col-xs-2 col-sm-2 control-label" for="textinput">Nickname</label>
             <div class="col-xs-6 col-sm-6 col-md-5">
-                <input id="textinput" name="textinput" type="text" ng-model="user.nikname" class="form-control input-md">
+                <input id="textinput" name="textinput" type="text" ng-model="user.nikname"  class="form-control input-md">
             </div>
         </div>
         <div class="form-group">
@@ -59,19 +66,25 @@
         <div class="form-group">
             <label class=" col-xs-2 col-sm-2 control-label" for="textinput">Email</label>
             <div class="col-xs-6 col-sm-6 col-md-5">
-                <input id="textinput" name="textinput" type="text" class="form-control input-md">
+                <input id="textinput" name="textinput" type="text" ng-model="user.email" placeholder={{user.email}} class="form-control input-md">
             </div>
         </div>
         <div class="form-group">
-            <label class=" col-xs-2 col-sm-2 control-label" for="textinput">Country</label>
+            <label class=" col-xs-2 col-sm-2 control-label" for="textinput">Role</label>
             <div class="col-xs-6 col-sm-6 col-md-5">
-                <input id="textinput" name="textinput" type="text" class="form-control input-md">
+                <select class="form-control" ng-model="user.role">
+                    <option ng-selected="user.role == item.name"
+                            ng-repeat="item in roles"
+                            ng-value="item.value">{{item.name}}
+                    </option>
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label class=" col-xs-2 col-sm-2 control-label" for="textinput">City</label>
+            <label class=" col-xs-2 col-sm-2 control-label" for="textinput">State</label>
             <div class="col-xs-6 col-sm-6 col-md-5">
-                <input id="textinput" name="textinput" type="text" class="form-control input-md">
+                <select class="form-control" ng-model="user.active"  ng-selected="user.active==active.value" ng-options="active.value as active.name for active in actives">
+                </select>
             </div>
         </div>
     </div>
@@ -80,6 +93,7 @@
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+<script src="/resources/js/utils/parse_url.js"></script>
 <script src="/resources/js/users/userEdit.js?id=${id}" id="loader"></script>
 </body>
 </html>

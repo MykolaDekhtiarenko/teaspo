@@ -104,6 +104,7 @@ public class UserApiController {
     public
     @ResponseBody Response<UserEntity>
     update(@RequestBody UserView userView) throws NoSuchEntityException {
+        System.out.print("Зайшло");
         return responseFactory.get(userService.update(userView));
     }
 
