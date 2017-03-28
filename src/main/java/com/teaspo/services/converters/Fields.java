@@ -15,4 +15,12 @@ public class Fields {
 
         public static final String DEFAULT = ID + ',' + EMAIL;
     }
+
+
+    public static class Place {
+        public static final String ID = "id";
+        public static final String NAME = "name";
+
+        public static final String DEFAULT = ID + ',' + NAME;
+    }
 }
