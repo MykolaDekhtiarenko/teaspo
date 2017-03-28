@@ -25,7 +25,7 @@ public class UserEntity {
     @Column(name = "nikname")
     private String nikname;
 
-    @Column(name = "state")
+    @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean active;
 

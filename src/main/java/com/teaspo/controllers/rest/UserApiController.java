@@ -42,6 +42,7 @@ public class UserApiController {
             @PathVariable("id") int userId,
             @RequestParam(value = "fields", required = false, defaultValue = Fields.User.DEFAULT) Set<String> fields
     ) throws TeaSpoException {
+        System.out.print(fields);
         return responseFactory.get(userService.getUserByIdMap(userId, fields));
     }
 
@@ -103,6 +104,7 @@ public class UserApiController {
     public
     @ResponseBody Response<UserEntity>
     update(@RequestBody UserView userView) throws NoSuchEntityException {
+        System.out.print("Зайшло");
         return responseFactory.get(userService.update(userView));
     }
 
